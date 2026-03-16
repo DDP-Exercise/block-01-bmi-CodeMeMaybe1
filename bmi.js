@@ -20,16 +20,28 @@
  *     To do so, collect data from your users. Values within :colons: are (formatted) user-inputs;
  *     values within <angle brackets> have to be calculated by your software.
  *
- *     You - 2026-03-05
+ *     CodeMeMaybe01 - 2026-03-05
  *******************************************************/
 
 /*
  * TODO: Declare and assign all necessary constants and variables with user input.
  * Make sure, to help your users understand what they need to type in, by using clear prompt-instructions.
  */
+const LAST_NAME = prompt("What is your last name?");
+const FIRST_NAME = prompt("What is your first name?");
+const AGE = prompt("How old are you?");
+const HEIGHT = prompt("How tall are you (in cm)?");
+const WEIGHT = prompt("How much do you weight (in kg)?");
+
+
+let gender = "";
+do {
+    gender = prompt("What is your gender?");
+} while (gender.toLowerCase() === "male"&& gender.toLowerCase() === "female");
+
 
 const LINE = "-----------------------------------------------------";
-let bmr, bmi, normal, danger;
+
 
 /**
  * Formulas:
@@ -45,33 +57,64 @@ let bmr, bmi, normal, danger;
  **/
 
 /*
- * TODO: To calculate the bmr; ask your users which calculation method they would prefer (male or female).
+ *  To calculate the bmr; ask your users which calculation method they would prefer (male or female).
  * Be careful. Users make typos. Make sure that you have a valid answer before moving on.
  */
+let bmr, bmi, normal, danger;
+if (gender === "female") {
+    bmr = 655 + 10 * WEIGHT + 2 * HEIGHT - 6 * AGE;
+} else if (gender === "male")
+    bmr = 66 + 14 * WEIGHT + 5 * HEIGHT - 7 * AGE;
 
-// TODO: To calculate the bmi, use the given formula with all the input you have collected.
-// TODO: Once you have the bmi, determine whether or not the weight is normal and if the condition is dangerous.
+
+//  To calculate the bmi, use the given formula with all the input you have collected.
+bmi = (10000 * WEIGHT) / HEIGHT**2
+
+//  Once you have the bmi, determine whether or not the weight is normal and if the condition is dangerous.
+normal = ( bmi >=18 && bmi <=25);
+danger = (bmi <16 || bmi >=30 );
 
 /*
  * TODO: Create the correct output from all your data. Make sure to stick to the promised format! NO EXCEPTIONS!
  * You can use \t to add a Tab-Space. Once your program is completed, the output in the browser console should
- * look EXACTLY like the Example-Output above (with different data, of course).
- *
- *  Valid Example:
- *   -----------------------------------------------------
- *   Name:		           NEUWERSCH, Matthias
- *   -----------------------------------------------------
- *   Age:                  35 Years
- *   Height:               1,78m
- *   Weight:               77 kg
- *   Basal Metabolic Rate: 1789 kcal
- *   Body Mass Index:      24.302487059714682
- *   Normal Weight:        Yes
- *   Danger:               No
- *   -----------------------------------------------------
- */
+ * look EXACTLY like the Example-Output above (with different data, of course). */
+//console.log(typeof(LAST_NAME) === "string");
+//console.log(typeof(FIRST_NAME) === "string");
+//console.log(typeof(AGE) === "string");
+//console.log(typeof(HEIGHT) === "string");
+//console.log(typeof(WEIGHT) === "string");
+//console.log(typeof(bmi) === "string");
 
-console.log(LINE); // Logs the dashed-line.
+
+/*
+*  Valid Example:
+*   -----------------------------------------------------
+*   Name:		           NEUWERSCH, Matthias
+*   -----------------------------------------------------
+*   Age:                  35 Years
+*   Height:               1,78m
+*   Weight:               77 kg
+*   Basal Metabolic Rate: 1789 kcal
+*   Body Mass Index:      24.302487059714682
+*   Normal Weight:        Yes
+*   Danger:               No
+*   -----------------------------------------------------
+*/
+//changes!!!!
+console.log(LINE);
+console.log("Name:" .padEnd(22) + LAST_NAME.toUpperCase() + ", " + FIRST_NAME);
+console.log(LINE);
+
+console.log("Age:" .padEnd(22) + AGE + " Years");
+console.log("Height:" .padEnd(22) + (HEIGHT / 100)  + "m");
+console.log("Weight:" .padEnd(22) + WEIGHT + " kg");
+console.log("Basal Metabolic Rate:" .padEnd(22) + bmr + " kcal" );
+console.log("Body Mass Index:" .padEnd(22) + bmi);
+console.log("Normal Weight:" .padEnd(22) + (normal ? "Yes" : "No"));
+console.log("Danger:" .padEnd(22) + (danger ? "Yes" : "No"));
+console.log(LINE);
+
+// Logs the dashed-line.
 
 /*
  * TODO: Make sure to TEST YOUR SOFTWARE! Does it work, when People are smaller than 1 meter? Or taller than 2?
